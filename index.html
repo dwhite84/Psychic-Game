@@ -1,0 +1,93 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Psychic-Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+    <h1>The Psychic Game</h1>
+
+    <div id="game">
+        <p>Guess what letter i'm thinking of</p>
+        <p>Wins: <span id="wins"></span></p>
+        <p>Loses: <span id="loses"></span></p>
+        <p>Guesses left: <span id= "Guesses left"></span></p>
+        <p>Your Guesses So Far:<span id="YourGuessesSoFar"></span></p>
+    </div>
+
+    <script type="text/javascript">
+
+//Array of letters for computer to guess
+        var computerGuesses = ["a", "b", "c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+   //Shows the player stats 
+        var wins = 0;
+        var losses = 0;     
+        var GuessesLeft = 10;
+        var YourGuessesSoFar = []; 
+    
+        //works when player touches any key
+        document.onkeyup = function(event) {
+           
+          var userGuess = event.key;
+          
+          var computerGuess = computerGuesses[Math.floor(Math.random() * computerGuesses.length)];
+
+          var options= ["a", "b", "c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+if (options.indexOf(userGuess) > -1) {
+
+        if(userGuess===computerGuess){
+          wins++
+          YourGuessesSoFar = 9;
+          GuessesLeft = [];
+          alert("Winner");
+
+        }
+        
+				if (userGuess != computerGuess) {
+					GuessesLeft --;
+					YourGuessesSoFar.push(userGuess);
+				}
+
+				if (YourGuessesSoFar === 0) {
+
+			  GuessesLeft = 9;
+				losses ++;
+				YourGuessesSoFar = [];
+      }
+      if(GuessesLeft===0){
+        GuessesLeft = 9;
+        losses++;
+        YourGuessesSoFar = [];
+
+      }
+    }
+        
+
+            document.getElementById("wins").innerHTML = wins;
+            document.getElementById("loses").innerHTML = losses;
+            document.getElementById("Guesses left").innerHTML = GuessesLeft;
+            document.getElementById("YourGuessesSoFar").innerHTML = YourGuessesSoFar;
+
+    
+            // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+            // var html =
+            //   "<p>You chose: " + userGuess + "</p>" +
+            //   "<p>The computer chose: " + computerGuess + "</p>" +
+            //   "<p>wins: " + wins + "</p>" +
+            //   "<p>losses: " + losses + "</p>" +
+            //   "<p>ties: " + ties + "</p>";
+    
+            // Set the inner HTML contents of the #game div to our html string
+            // document.querySelector("#game").innerHTML = html;
+        };
+      </script>
+    
+</body>
+</html>
